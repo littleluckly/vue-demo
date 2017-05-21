@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <h1>欢迎来到我的vue DEMO</h1>
+    <v-header v-bind:transData='transData' v-on:incrementChild="incrementParent"></v-header>
+    <div class="parentTotal">
+    	我是父组件{{parentTotal}}
+    </div>
     <div class="content">
     	    <ol type="value" class="left">
     	    	<li> <router-link to='eventHanding1'>事件监听-1</router-link></li>
@@ -35,6 +38,9 @@
 			    	<li> <router-link to='/bindClass3'>绑定class-3,绑定计算属性对象</router-link></li>
 			    	<li> <router-link to='/bindClass4'>绑定class-4,传递数组</router-link></li>
 			    	<li> <router-link to='/toDoList'>To do list</router-link></li>
+			    	<li> <router-link to='/nestRoute'>嵌套路由</router-link></li>
+			    	<li> <router-link to='/slotTest1'>slot-1-内容分发</router-link></li>
+			    	<li> <router-link to='/slotTest2'>slot-2-作用域插槽</router-link></li>
 			    </ol>
 			    <div class="right clearfix">
 			    	    <router-view></router-view>
@@ -44,8 +50,23 @@
 </template>
 
 <script>
+	import header from '@/components/header'
 export default {
-  name: 'app'
+  name: 'app',
+  data() {
+  	return {
+  		transData:'欢迎来到我的vue DEMO',
+  		parentTotal: 0
+  	}
+  },
+  components: {
+  	'v-header':header
+  },
+  methods: {
+  	incrementParent: function(){
+  		this.parentTotal++;
+  	}
+  }
 }
 </script>
 
@@ -79,7 +100,7 @@ export default {
 }
 div.content {
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 	margin-left: 15px;
 }

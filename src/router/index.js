@@ -36,11 +36,22 @@ import bindClass3 from '@/components/bindClass3'
 import bindClass4 from '@/components/bindClass4'
 import toDoList from '@/components/toDoList'
 
+import nestRoute from '@/components/nestRoute'
+import childrenComponent from '@/components/childrenComponent'
+import childrenComponent2 from '@/components/childrenComponent2'
+import header from '@/components/header'
+import slotTest1 from '@/components/slotTest1'
+import slotTest2 from '@/components/slotTest2'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+  	{
+  		path: '',
+  		name: 'hello',
+  		component: Hello
+  	},
     {
       path: '/eventHanding1',
       name: 'eventHanding1',
@@ -185,6 +196,27 @@ export default new Router({
     	path: '/toDoList',
     	name: 'toDoList',
     	component:toDoList
-    }
+    },{
+    	path: '/nestRoute',
+    	component: nestRoute,
+    	children:[
+    		{
+    			path: '', 
+    			component: childrenComponent
+    		},
+    		{
+    			path: '/childrenComponent2', 
+    			component: childrenComponent2
+    		}
+    	]
+    },{
+    	path: '/slotTest1',
+    	name:'slotTest1',
+    	component: slotTest1
+    },{
+    	path: '/slotTest2',
+    	name:'slotTest2',
+    	component: slotTest2
+    },
   ]
 })
